@@ -1,9 +1,11 @@
-# packages설치 :requests, bs4, lxml, pandas
+# packages설치 :requests, bs4, lxml, pandas, sqlalchemy, pymysql
 #
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import pandas as pd
+from sqlalchemy import create_engine
+
 
 
 # 최신회차 크롤링 함수
@@ -61,4 +63,11 @@ for i in range(1, recent_count+1):
 # print(list_df)
 
 lotto_df = pd.DataFrame(data = list_df, columns = ['count','date','num1','num2','num3','num4','num5','num6','bonus'])
-print(lotto_df)
+# print(lotto_df)
+
+# Database ( Mysql ) 에  저장
+
+engine = create_engine("mysql+pymysql://root:12345@localhost:3306/pydb?charset=utf8mb4")
+engine.connect()
+
+lotto_df.to_sql(name='lotto_tbl', con=engine, if_exists='append', index=False)
