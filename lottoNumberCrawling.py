@@ -71,3 +71,4 @@ engine = create_engine("mysql+pymysql://root:12345@localhost:3306/pydb?charset=u
 engine.connect()
 
 lotto_df.to_sql(name='lotto_tbl', con=engine, if_exists='append', index=False)
+# lotto_df.to_csv('lotto_data.csv', index = False)  # csv로 변환저장
