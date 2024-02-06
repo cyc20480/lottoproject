@@ -1,8 +1,9 @@
-# packages설치 :requests, bs4, lxml
+# packages설치 :requests, bs4, lxml, pandas
 #
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import pandas as pd
 
 
 # 최신회차 크롤링 함수
@@ -41,4 +42,23 @@ def get_lottonumber(count):
 
 recent_count = get_recent_count()
 
+list_df = []
 for i in range(1, recent_count+1):
+# for i in range(1, 5):
+    result = get_lottonumber(i)
+    list_df.append({
+                    'count':i ,  #회차
+                    'date': result['date'], #추첨일
+                     'num1': result['lottoNumber'][0],
+                     'num2': result['lottoNumber'][1],
+                     'num3': result['lottoNumber'][2],
+                     'num4': result['lottoNumber'][3],
+                     'num5': result['lottoNumber'][4],
+                     'num6': result['lottoNumber'][5],
+                     'bonus':result['bonusNumber']
+    })
+    print((recent_count+1)-i)
+# print(list_df)
+
+lotto_df = pd.DataFrame(data = list_df, columns = ['count','date','num1','num2','num3','num4','num5','num6','bonus'])
+print(lotto_df)

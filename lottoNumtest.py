@@ -18,6 +18,6 @@ print(lottoNum_list_int)
 bonus_num = int(soup.find('div', class_='num bonus').find('p').text.strip())#보너스번호ㅡ
 print(bonus_num)
 
-# Data Frame 형태로 변환..
+# Data Frame 형태로 변환....
 lotto_dic = {'date': date, 'lottoNumber':lottoNum_list_int, 'bonusNumber':bonus_num }
 print(lotto_dic)
